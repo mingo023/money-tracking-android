@@ -29,6 +29,15 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return "OBJECT " + (position + 1);
+        switch (position) {
+            case 0:
+                return "DAY";
+            case 1:
+                return "WEEK";
+            case 2:
+                return "MONTH";
+            default:
+                return "WRONG";
+        }
     }
 }

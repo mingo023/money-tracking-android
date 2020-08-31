@@ -16,7 +16,7 @@ public class PagerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag3_layout, container, false);
+        return inflater.inflate(R.layout.transactions_container, container, false);
     }
 
     @Override

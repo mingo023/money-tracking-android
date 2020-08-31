@@ -3,18 +3,23 @@ package com.cs50.finalprojectcs50.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.cs50.finalprojectcs50.R;
 import com.cs50.finalprojectcs50.adapter.PagerAdapter;
 import com.cs50.finalprojectcs50.database.CategoryDatabase;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.transition.MaterialContainerTransform;
 
 public class MainActivity extends AppCompatActivity {
     private static CategoryDatabase categoryDatabase;
     private PagerAdapter pagerAdapter;
     private ViewPager viewPager;
     private TabLayout tabLayout;
+    private FloatingActionButton addNewTransactionBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,5 +36,21 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
+
+
+        addNewTransactionBtn = findViewById(R.id.add_new_transaction_btn);
+        addNewTransactionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleBtnClick(v);
+            }
+        });
+
+    }
+
+    private void handleBtnClick(View v) {
+        MaterialContainerTransform materialContainerTransform = new MaterialContainerTransform();
+        Intent intent = new Intent(this, ActivityCreateTransaction.class);
+        startActivity(intent);
     }
 }
