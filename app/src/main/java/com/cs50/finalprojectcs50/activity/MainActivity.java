@@ -1,7 +1,6 @@
 package com.cs50.finalprojectcs50.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -27,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 //                .build();
 
         pagerAdapter = new PagerAdapter(getSupportFragmentManager());
-
         viewPager = findViewById(R.id.pager);
         viewPager.setAdapter(pagerAdapter);
 
