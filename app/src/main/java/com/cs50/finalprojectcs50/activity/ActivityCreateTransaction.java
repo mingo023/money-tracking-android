@@ -10,12 +10,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Toast;
 
 import com.cs50.finalprojectcs50.R;
 import com.cs50.finalprojectcs50.database.AppDatabase;
 import com.cs50.finalprojectcs50.model.Category;
 import com.cs50.finalprojectcs50.model.Transaction;
+import com.cs50.finalprojectcs50.utils.DateConverters;
 import com.cs50.finalprojectcs50.utils.FieldValidation;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
@@ -46,14 +46,15 @@ public class ActivityCreateTransaction extends AppCompatActivity {
 
         dropDownCategory = findViewById(R.id.category_dropdown);
         datePickerInput = findViewById(R.id.date_picker);
-        amountInput = findViewById(R.id.amount_txt);
-        noteInput = findViewById(R.id.note_txt);
+        amountInput = findViewById(R.id.amount_input);
+        noteInput = findViewById(R.id.note_input);
 
         amountLayout = findViewById(R.id.amount_input_layout);
         noteLayout = findViewById(R.id.note_input_layout);
         categoryLayout = findViewById(R.id.category_input_layout);
         dateLayout = findViewById(R.id.date_picker_layout);
 
+        datePickerInput.setText(DateConverters.formatDate(new Date(), "dd/MM/yyyy"));
 
         initializeCategorySelector();
         handleDatePicker();
@@ -139,10 +140,10 @@ public class ActivityCreateTransaction extends AppCompatActivity {
         AppDatabase.getInstance(this).transactionDao().insert(new Transaction(
                 amount,
                 note,
-                date,
+                new Date(date),
                 categoryId
         ));
 
-        Toast.makeText(this,"Create success", Toast.LENGTH_LONG).show();
+        finish();
     }
 }

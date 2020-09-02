@@ -7,6 +7,7 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
 import java.util.UUID;
 
 import static androidx.room.ForeignKey.CASCADE;
@@ -32,16 +33,27 @@ public class Transaction {
     public String note;
 
     @ColumnInfo
-    public String date;
+    public Date date;
 
     @ColumnInfo(name = "category_id")
     public String categoryId;
 
-    public Transaction(long amount, String note, String date, String categoryId) {
+    public Transaction(long amount, String note, Date date, String categoryId) {
         this.id = UUID.randomUUID().toString();
         this.amount = amount;
         this.note = note;
         this.date = date;
         this.categoryId = categoryId;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id='" + id + '\'' +
+                ", amount=" + amount +
+                ", note='" + note + '\'' +
+                ", date=" + date +
+                ", categoryId='" + categoryId + '\'' +
+                '}';
     }
 }

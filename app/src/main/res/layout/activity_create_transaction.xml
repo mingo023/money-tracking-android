@@ -15,12 +15,13 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
+        app:startIconDrawable="@drawable/ic_baseline_attach_money_24"
         android:hint="Amount"
         app:errorEnabled="true">
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/amount_txt"
+            android:id="@+id/amount_input"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="number" />
@@ -32,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Note"
+        app:startIconDrawable="@drawable/ic_baseline_note_24"
         android:layout_marginVertical="8dp"
         android:layout_marginHorizontal="16dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -39,7 +41,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/note_txt"
+            android:id="@+id/note_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top"
@@ -54,6 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Cateogry"
+        app:startIconDrawable="@drawable/ic_baseline_category_24"
         android:layout_marginVertical="8dp"
         android:layout_marginHorizontal="16dp"
         app:errorEnabled="true"
@@ -74,6 +77,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Date"
+        app:startIconDrawable="@drawable/ic_baseline_calendar_today_24"
         android:layout_marginVertical="8dp"
         android:layout_marginHorizontal="16dp"
         app:errorEnabled="true"
@@ -86,6 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="date"
+            android:text="dd/mm/yyyy"
             />
 
     </com.google.android.material.textfield.TextInputLayout>

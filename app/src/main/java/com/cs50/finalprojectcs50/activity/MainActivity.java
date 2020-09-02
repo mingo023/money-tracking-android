@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.amitshekhar.DebugDB;
 import com.cs50.finalprojectcs50.R;
@@ -48,6 +49,5 @@ public class MainActivity extends AppCompatActivity {
         MaterialContainerTransform materialContainerTransform = new MaterialContainerTransform();
         Intent intent = new Intent(this, ActivityCreateTransaction.class);
         startActivity(intent);
-//        AppDatabase.getInstance(this).categoryDao().insert(new Category("Food"));
     }
 }

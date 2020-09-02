@@ -5,6 +5,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.cs50.finalprojectcs50.model.Transaction;
+import com.cs50.finalprojectcs50.model.TransactionAndCategory;
 
 import java.util.List;
 
@@ -22,7 +23,10 @@ public interface TransactionDao {
     @Query("SELECT * FROM transactions WHERE category_id = :categoryId")
     List<Transaction> getTransactionsByCategory(int categoryId);
 
-
     @Insert
     void insert(Transaction transaction);
+
+    @androidx.room.Transaction
+    @Query("SELECT * FROM transactions")
+    List<TransactionAndCategory> getTransactionsAndCategory();
 }
