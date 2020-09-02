@@ -7,15 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.amitshekhar.DebugDB;
 import com.cs50.finalprojectcs50.R;
 import com.cs50.finalprojectcs50.adapter.PagerAdapter;
-import com.cs50.finalprojectcs50.database.CategoryDatabase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.transition.MaterialContainerTransform;
 
 public class MainActivity extends AppCompatActivity {
-    private static CategoryDatabase categoryDatabase;
     private PagerAdapter pagerAdapter;
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -25,10 +24,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        categoryDatabase = Room.databaseBuilder(getApplicationContext(), CategoryDatabase.class, "categories")
-//                .allowMainThreadQueries()
-//                .build();
 
         pagerAdapter = new PagerAdapter(getSupportFragmentManager());
         viewPager = findViewById(R.id.pager);
@@ -46,11 +41,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        DebugDB.getAddressLog();
     }
 
     private void handleBtnClick(View v) {
         MaterialContainerTransform materialContainerTransform = new MaterialContainerTransform();
         Intent intent = new Intent(this, ActivityCreateTransaction.class);
         startActivity(intent);
+//        AppDatabase.getInstance(this).categoryDao().insert(new Category("Food"));
     }
 }

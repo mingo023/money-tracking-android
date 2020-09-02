@@ -23,6 +23,6 @@ public class PagerFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Bundle args = getArguments();
         ((TextView) view.findViewById(R.id.text))
-                .setText(Integer.toString(args.getInt(ARG_OBJECT)));
+                .setText(args.getString(ARG_OBJECT));
     }
 }

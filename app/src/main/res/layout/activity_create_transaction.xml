@@ -86,7 +86,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="date"
-            android:text="09/09/2000"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -98,6 +97,7 @@
         android:layout_marginTop="12dp"
         android:paddingHorizontal="50dp"
         android:text="ADD"
+        android:onClick="addTransaction"
         android:gravity="center_vertical"
         tools:ignore="RtlCompat" />
 

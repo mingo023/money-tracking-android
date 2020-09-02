@@ -6,7 +6,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.cs50.finalprojectcs50.activity.MainActivity;
 import com.cs50.finalprojectcs50.fragment.PagerFragment;
+import com.cs50.finalprojectcs50.model.Category;
+
+import java.util.List;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     public PagerAdapter(FragmentManager fm) {
@@ -15,9 +19,16 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
+//        List<Category> categories = MainActivity.categoryDatabase.categoryDao().getCategories();
+//        String qq = "";
+//        for (Category c: categories) {
+//            qq += "id = " + c.id + ", name= " + c.name + "\n";
+//        }
+
+
         Fragment fragment = new PagerFragment();
         Bundle args = new Bundle();
-        args.putInt(PagerFragment.ARG_OBJECT, i + 1);
+        args.putString(PagerFragment.ARG_OBJECT, "qq");
         fragment.setArguments(args);
         return fragment;
     }

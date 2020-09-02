@@ -10,20 +10,34 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Toast;
 
 import com.cs50.finalprojectcs50.R;
+import com.cs50.finalprojectcs50.database.AppDatabase;
+import com.cs50.finalprojectcs50.model.Category;
+import com.cs50.finalprojectcs50.model.Transaction;
+import com.cs50.finalprojectcs50.utils.FieldValidation;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ActivityCreateTransaction extends AppCompatActivity {
     private AutoCompleteTextView dropDownCategory;
     private TextInputEditText datePickerInput;
-    private TextInputLayout amountInputLayout;
+    private TextInputEditText amountInput;
+    private TextInputEditText noteInput;
+
+    private TextInputLayout amountLayout;
+    private TextInputLayout noteLayout;
+    private TextInputLayout categoryLayout;
+    private TextInputLayout dateLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +46,32 @@ public class ActivityCreateTransaction extends AppCompatActivity {
 
         dropDownCategory = findViewById(R.id.category_dropdown);
         datePickerInput = findViewById(R.id.date_picker);
-        amountInputLayout = findViewById(R.id.amount_input_layout);
+        amountInput = findViewById(R.id.amount_txt);
+        noteInput = findViewById(R.id.note_txt);
+
+        amountLayout = findViewById(R.id.amount_input_layout);
+        noteLayout = findViewById(R.id.note_input_layout);
+        categoryLayout = findViewById(R.id.category_input_layout);
+        dateLayout = findViewById(R.id.date_picker_layout);
+
 
         initializeCategorySelector();
         handleDatePicker();
     }
 
     private void initializeCategorySelector() {
-        String[] COUNTRIES = new String[] {"Item 1", "Item 2", "Item 3", "Item 4"};
+        List<String> options = new ArrayList<>();
+
+        List<Category> categories = AppDatabase.getInstance(getApplicationContext()).categoryDao().getCategories();
+        for (Category category: categories) {
+            options.add(category.name);
+        }
 
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(
                         this,
                         R.layout.dropdown_menu_popup_category,
-                        COUNTRIES);
+                        options);
 
         dropDownCategory.setAdapter(adapter);
 
@@ -77,6 +103,46 @@ public class ActivityCreateTransaction extends AppCompatActivity {
                 return true;
             }
         });
+    }
 
+    public void addTransaction(View v) {
+        int errorCount = 0;
+
+        int amount;
+        String amountString = amountInput.getText().toString();
+        FieldValidation amountValidation = new FieldValidation(amountLayout);
+        errorCount += amountValidation.required(amountString,"Amount field is required").validate();
+        try {
+            amount = Integer.parseInt(amountInput.getText().toString());
+        } catch (NumberFormatException e) {
+            amount = 0;
+        }
+
+        String note = noteInput.getText().toString();
+        FieldValidation noteValidation = new FieldValidation(noteLayout);
+        errorCount += noteValidation.required(note,"Note field is required").validate();
+
+        String category = dropDownCategory.getText().toString();
+        FieldValidation categoryValidation = new FieldValidation(categoryLayout);
+        errorCount += categoryValidation.required(category,"Category field is required").validate();
+
+        String date = datePickerInput.getText().toString();
+        FieldValidation dateValidation = new FieldValidation(dateLayout);
+        errorCount += dateValidation.required(date,"Date field is required").validate();
+
+        if (errorCount != 0) {
+            return;
+        }
+
+        String categoryId = AppDatabase.getInstance(this).categoryDao().findCategoryByName(category).id;
+
+        AppDatabase.getInstance(this).transactionDao().insert(new Transaction(
+                amount,
+                note,
+                date,
+                categoryId
+        ));
+
+        Toast.makeText(this,"Create success", Toast.LENGTH_LONG).show();
     }
 }

@@ -1,26 +1,47 @@
 package com.cs50.finalprojectcs50.model;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
+import java.util.UUID;
 
-@Entity(tableName = "transactions")
+import static androidx.room.ForeignKey.CASCADE;
+
+@Entity(
+        tableName = "transactions",
+        foreignKeys = @ForeignKey(
+                entity = Category.class,
+                parentColumns = "id",
+                childColumns = "category_id",
+                onDelete = CASCADE
+        )
+)
 public class Transaction {
     @PrimaryKey
-    public int id;
+    @NonNull
+    public String id;
 
     @ColumnInfo
     public long amount;
 
     @ColumnInfo
-    public Date date;
+    public String note;
 
-    @ForeignKey(entity = Category.class,
-            parentColumns = "id",
-            childColumns = "categoryId"
-    )
-    public int categoryId;
+    @ColumnInfo
+    public String date;
+
+    @ColumnInfo(name = "category_id")
+    public String categoryId;
+
+    public Transaction(long amount, String note, String date, String categoryId) {
+        this.id = UUID.randomUUID().toString();
+        this.amount = amount;
+        this.note = note;
+        this.date = date;
+        this.categoryId = categoryId;
+    }
 }
