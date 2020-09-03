@@ -2,6 +2,7 @@ package com.cs50.finalprojectcs50.adapter;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -13,30 +14,29 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         super(fm);
     }
 
+    private static String[] pagerNames = {"DAY", "WEEK", "MONTH"};
+
     @Override
     public Fragment getItem(int i) {
         Fragment fragment = new PagerFragment();
         Bundle args = new Bundle();
+        args.putInt("pageIndex", i);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return pagerNames.length;
+    }
+
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return super.getItemPosition(object);
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position) {
-            case 0:
-                return "DAY";
-            case 1:
-                return "WEEK";
-            case 2:
-                return "MONTH";
-            default:
-                return "WRONG";
-        }
+        return pagerNames[position];
     }
 }

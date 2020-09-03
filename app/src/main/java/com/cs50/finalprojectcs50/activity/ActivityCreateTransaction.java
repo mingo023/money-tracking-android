@@ -140,7 +140,7 @@ public class ActivityCreateTransaction extends AppCompatActivity {
         AppDatabase.getInstance(this).transactionDao().insert(new Transaction(
                 amount,
                 note,
-                new Date(date),
+                DateConverters.transformDateFormat(date, "dd/MM/yyyy"),
                 categoryId
         ));
 

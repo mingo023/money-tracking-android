@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,11 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cs50.finalprojectcs50.R;
 import com.cs50.finalprojectcs50.adapter.TransactionsAdapter;
+import com.cs50.finalprojectcs50.utils.DateConverters;
 
 public class PagerFragment extends Fragment {
     private RecyclerView recyclerView;
     private TransactionsAdapter transactionAdapter;
     private RecyclerView.LayoutManager layoutManager;
+
+    private static int currentPageIndex;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -40,11 +42,35 @@ public class PagerFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Bundle args = getArguments();
+        int pageIndex = args.getInt("pageIndex");
+        loadData(pageIndex);
+        currentPageIndex = pageIndex;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        transactionAdapter.loadData();
+        loadData(currentPageIndex);
+    }
+
+    private void loadData(int pageIndex) {
+        long rangeStart = 0;
+        long rangeEnd = 0;
+
+        switch (pageIndex) {
+            case 0:
+                rangeStart = DateConverters.startOfDate().getTime();
+                rangeEnd = DateConverters.endOfDate().getTime();
+                break;
+            case 1:
+                rangeStart = DateConverters.startOfWeek().getTime();
+                rangeEnd = DateConverters.endOfWeek().getTime();
+                break;
+            default:
+                rangeStart = DateConverters.startOfMonth().getTime();
+                rangeEnd = DateConverters.endOfMonth().getTime();
+        }
+
+        transactionAdapter.loadData(rangeStart, rangeEnd);
     }
 }

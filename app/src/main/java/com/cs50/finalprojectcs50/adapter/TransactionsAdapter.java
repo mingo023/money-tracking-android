@@ -74,4 +74,9 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         this.dataSets = AppDatabase.getInstance(context).transactionDao().getTransactionsAndCategory();
         notifyDataSetChanged();
     }
+
+    public void loadData(long start, long end) {
+        this.dataSets = AppDatabase.getInstance(context).transactionDao().getTransactionsAndCategory(start, end);
+        notifyDataSetChanged();
+    }
 }

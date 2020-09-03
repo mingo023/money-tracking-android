@@ -29,4 +29,8 @@ public interface TransactionDao {
     @androidx.room.Transaction
     @Query("SELECT * FROM transactions")
     List<TransactionAndCategory> getTransactionsAndCategory();
+
+    @androidx.room.Transaction
+    @Query("SELECT * FROM transactions WHERE date >= :start AND date <= :end")
+    List<TransactionAndCategory> getTransactionsAndCategory(long start, long end);
 }

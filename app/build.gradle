@@ -12,7 +12,11 @@ android {
     ndkVersion "21.3.6528147"
     buildToolsVersion "29.0.3"
 
-
+    compileOptions {
+        // Sets Java compatibility to Java 8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     defaultConfig {
         applicationId "com.cs50.finalprojectcs50"
         minSdkVersion 26
@@ -38,6 +42,7 @@ dependencies {
     implementation "androidx.room:room-runtime:2.2.5"
     implementation 'com.google.android.material:material:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'joda-time:joda-time:2.10.6'
 
     annotationProcessor "androidx.room:room-compiler:2.2.5"
 

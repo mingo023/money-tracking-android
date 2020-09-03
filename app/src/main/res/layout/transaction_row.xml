@@ -24,10 +24,10 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_marginRight="4dp"
-                    android:src="@drawable/ic_baseline_attach_money_24" />
+                    android:src="@drawable/ic_coin" />
 
                 <TextView
                     android:id="@+id/amount_text"
@@ -43,10 +43,10 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_marginRight="4dp"
-                    android:src="@drawable/ic_baseline_note_24" />
+                    android:src="@drawable/ic_note" />
 
                 <TextView
                     android:id="@+id/note_text"
@@ -60,10 +60,10 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_marginRight="4dp"
-                    android:src="@drawable/ic_baseline_category_24" />
+                    android:src="@drawable/ic_categories" />
 
                 <TextView
                     android:id="@+id/category_text"
@@ -77,10 +77,10 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_marginRight="4dp"
-                    android:src="@drawable/ic_baseline_calendar_today_24" />
+                    android:src="@drawable/ic_calendar" />
 
                 <TextView
                     android:id="@+id/date_text"
