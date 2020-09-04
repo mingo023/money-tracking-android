@@ -16,10 +16,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.transition.MaterialContainerTransform;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private PagerAdapter pagerAdapter;
@@ -38,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
-
 
         addNewTransactionBtn = findViewById(R.id.add_new_transaction_btn);
 

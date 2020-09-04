@@ -39,6 +39,7 @@ public class PagerFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        setRetainInstance(true);
         Bundle args = getArguments();
         int pageIndex = args.getInt("pageIndex");
         loadData(pageIndex);
@@ -73,6 +74,8 @@ public class PagerFragment extends Fragment {
         if (rangeStart == 0 && rangeEnd == 0) {
             transactionAdapter.loadData();
         }
-        transactionAdapter.loadData(rangeStart, rangeEnd);
+        transactionAdapter.setRangeTransactionStart(rangeStart);
+        transactionAdapter.setRangeTransactionEnd(rangeEnd);
+        transactionAdapter.loadData();
     }
 }

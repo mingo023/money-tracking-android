@@ -8,9 +8,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.cs50.finalprojectcs50.R;
+import com.cs50.finalprojectcs50.activity.MainActivity;
 import com.cs50.finalprojectcs50.database.AppDatabase;
 import com.cs50.finalprojectcs50.model.Category;
 import com.cs50.finalprojectcs50.model.Transaction;
@@ -28,6 +31,9 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
     private Context context;
     private BottomSheetDialog bottomSheetDialog;
     private LinearLayout deleteButton;
+
+    private long rangeTransactionStart;
+    private long rangeTransactionEnd;
 
     private static TransactionsAdapter INSTANCE;
 
@@ -89,6 +95,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
             AppDatabase.getInstance(context).transactionDao().delete(transaction.id);
             loadData();
             bottomSheetDialog.dismiss();
+            PagerAdapter.getInstance().notifyDataSetChanged();
         });
         holder.cardView.setOnLongClickListener(v -> {
             bottomSheetDialog.show();
@@ -101,17 +108,24 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         return dataSets.size();
     }
 
-    public void loadData(long start, long end) {
+    public void loadData() {
         this.dataSets.clear();
-        List<TransactionAndCategory> newData = AppDatabase.getInstance(context).transactionDao().getTransactionsAndCategory(start, end);
+        List<TransactionAndCategory> newData;
+        if (rangeTransactionStart == 0 && rangeTransactionEnd == 0) {
+            newData = AppDatabase.getInstance(context).transactionDao().getTransactionsAndCategory();
+        } else {
+            newData = AppDatabase.getInstance(context).transactionDao().getTransactionsAndCategory(rangeTransactionStart, rangeTransactionEnd);
+        }
+
         this.dataSets.addAll(newData);
         notifyDataSetChanged();
     }
 
-    public void loadData() {
-        this.dataSets.clear();
-        List<TransactionAndCategory> newData = AppDatabase.getInstance(context).transactionDao().getTransactionsAndCategory();
-        this.dataSets.addAll(newData);
-        notifyDataSetChanged();
+    public void setRangeTransactionStart(long rangeTransactionStart) {
+        this.rangeTransactionStart = rangeTransactionStart;
+    }
+
+    public void setRangeTransactionEnd(long rangeTransactionEnd) {
+        this.rangeTransactionEnd = rangeTransactionEnd;
     }
 }

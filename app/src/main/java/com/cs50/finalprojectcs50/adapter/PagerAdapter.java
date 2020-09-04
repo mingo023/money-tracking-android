@@ -1,8 +1,11 @@
 package com.cs50.finalprojectcs50.adapter;
 
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -10,8 +13,14 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import com.cs50.finalprojectcs50.fragment.PagerFragment;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
+    public static PagerAdapter INSTANCE;
     public PagerAdapter(FragmentManager fm) {
         super(fm);
+        INSTANCE = this;
+    }
+
+    public static PagerAdapter getInstance() {
+        return INSTANCE;
     }
 
     private static String[] pagerNames = {"DAY", "WEEK", "MONTH", "ALL"};
@@ -32,7 +41,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getItemPosition(@NonNull Object object) {
-        return super.getItemPosition(object);
+        return POSITION_NONE;
     }
 
     @Override
