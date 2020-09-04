@@ -21,7 +21,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         Fragment fragment = new PagerFragment();
         Bundle args = new Bundle();
         args.putInt("pageIndex", i);
-        System.out.println(i);
         fragment.setArguments(args);
         return fragment;
     }

@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.amitshekhar.DebugDB;
 import com.cs50.finalprojectcs50.R;
 import com.cs50.finalprojectcs50.adapter.PagerAdapter;
+import com.cs50.finalprojectcs50.fragment.PagerFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.transition.MaterialContainerTransform;

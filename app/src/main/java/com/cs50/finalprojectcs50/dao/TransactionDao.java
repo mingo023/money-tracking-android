@@ -33,4 +33,7 @@ public interface TransactionDao {
     @androidx.room.Transaction
     @Query("SELECT * FROM transactions WHERE date >= :start AND date <= :end")
     List<TransactionAndCategory> getTransactionsAndCategory(long start, long end);
+
+    @Query("DELETE FROM transactions WHERE id=:id")
+    void delete(String id);
 }

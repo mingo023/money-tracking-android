@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.cs50.finalprojectcs50.R;
 import com.cs50.finalprojectcs50.adapter.TransactionsAdapter;
@@ -49,11 +48,10 @@ public class PagerFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        System.out.println(currentPageIndex);
         loadData(currentPageIndex);
     }
 
-    private void loadData(int pageIndex) {
+    public void loadData(int pageIndex) {
         long rangeStart = 0;
         long rangeEnd = 0;
 
@@ -72,6 +70,9 @@ public class PagerFragment extends Fragment {
                 break;
         }
 
+        if (rangeStart == 0 && rangeEnd == 0) {
+            transactionAdapter.loadData();
+        }
         transactionAdapter.loadData(rangeStart, rangeEnd);
     }
 }
