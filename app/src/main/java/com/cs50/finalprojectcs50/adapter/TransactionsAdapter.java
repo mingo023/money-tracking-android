@@ -17,6 +17,7 @@ import com.cs50.finalprojectcs50.model.TransactionAndCategory;
 import com.cs50.finalprojectcs50.utils.DateConverters;
 import com.cs50.finalprojectcs50.utils.StringConverts;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapter.TransactionViewHolder> {
@@ -26,7 +27,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
     public TransactionsAdapter(Context context) {
         this.context = context;
-        this.loadData();
+        this.dataSets = new ArrayList<>();
     }
 
     public static class TransactionViewHolder extends RecyclerView.ViewHolder {
@@ -70,13 +71,18 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         return dataSets.size();
     }
 
-    public void loadData() {
-        this.dataSets = AppDatabase.getInstance(context).transactionDao().getTransactionsAndCategory();
+    public void loadData(long start, long end) {
+        this.dataSets.clear();
+        List<TransactionAndCategory> newData;
+        if (start == 0 && end == 0) {
+            newData = AppDatabase.getInstance(context).transactionDao().getTransactionsAndCategory();
+        } else {
+            newData = AppDatabase.getInstance(context).transactionDao().getTransactionsAndCategory(start, end);
+        }
+
+        this.dataSets.addAll(newData);
+
         notifyDataSetChanged();
     }
 
-    public void loadData(long start, long end) {
-        this.dataSets = AppDatabase.getInstance(context).transactionDao().getTransactionsAndCategory(start, end);
-        notifyDataSetChanged();
-    }
 }

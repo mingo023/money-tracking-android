@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.cs50.finalprojectcs50.R;
 import com.cs50.finalprojectcs50.adapter.TransactionsAdapter;
@@ -20,14 +21,13 @@ public class PagerFragment extends Fragment {
     private TransactionsAdapter transactionAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    private static int currentPageIndex;
+    private int currentPageIndex;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.transactions_container, container, false);
-
         recyclerView = view.findViewById(R.id.transaction_recycler_view);
 
         layoutManager = new LinearLayoutManager(getContext());
@@ -35,7 +35,6 @@ public class PagerFragment extends Fragment {
 
         transactionAdapter = new TransactionsAdapter(getContext());
         recyclerView.setAdapter(transactionAdapter);
-
         return view;
     }
 
@@ -50,6 +49,7 @@ public class PagerFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        System.out.println(currentPageIndex);
         loadData(currentPageIndex);
     }
 
@@ -66,9 +66,10 @@ public class PagerFragment extends Fragment {
                 rangeStart = DateConverters.startOfWeek().getTime();
                 rangeEnd = DateConverters.endOfWeek().getTime();
                 break;
-            default:
+            case 2:
                 rangeStart = DateConverters.startOfMonth().getTime();
                 rangeEnd = DateConverters.endOfMonth().getTime();
+                break;
         }
 
         transactionAdapter.loadData(rangeStart, rangeEnd);

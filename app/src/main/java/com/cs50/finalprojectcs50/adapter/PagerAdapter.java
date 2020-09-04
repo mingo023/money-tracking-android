@@ -14,13 +14,14 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         super(fm);
     }
 
-    private static String[] pagerNames = {"DAY", "WEEK", "MONTH"};
+    private static String[] pagerNames = {"DAY", "WEEK", "MONTH", "ALL"};
 
     @Override
     public Fragment getItem(int i) {
         Fragment fragment = new PagerFragment();
         Bundle args = new Bundle();
         args.putInt("pageIndex", i);
+        System.out.println(i);
         fragment.setArguments(args);
         return fragment;
     }
