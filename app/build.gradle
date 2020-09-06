@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 allprojects {
     repositories {
+        maven { url 'https://jitpack.io' }
         google()
         jcenter()
     }
@@ -44,6 +45,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'joda-time:joda-time:2.10.6'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     annotationProcessor "androidx.room:room-compiler:2.2.5"
 

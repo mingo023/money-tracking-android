@@ -4,6 +4,8 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.cs50.finalprojectcs50.model.SumAmountTransaction;
+import com.cs50.finalprojectcs50.model.SumTransactionWithCategory;
 import com.cs50.finalprojectcs50.model.Transaction;
 import com.cs50.finalprojectcs50.model.TransactionAndCategory;
 
@@ -13,6 +15,12 @@ import java.util.List;
 public interface TransactionDao {
     @Insert
     void insert(Transaction transaction);
+
+    @Query("SELECT date, SUM(amount) as amount FROM transactions GROUP BY date")
+    List<SumAmountTransaction> getTransactions();
+
+    @Query("SELECT SUM(amount) as amount, categories.name as categoryName FROM transactions INNER JOIN categories ON transactions.category_id=categories.id GROUP BY categories.id")
+    List<SumTransactionWithCategory> getSumAmountWithCategory();
 
     @androidx.room.Transaction
     @Query("SELECT * FROM transactions")
@@ -27,4 +35,5 @@ public interface TransactionDao {
 
     @Query("UPDATE transactions SET amount=:amount, note =:note, category_id=:categoryId, date=:date WHERE id=:id")
     void update(String id, long amount, String note, String categoryId, long date);
+
 }

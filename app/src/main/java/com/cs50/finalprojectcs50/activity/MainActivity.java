@@ -3,18 +3,14 @@ package com.cs50.finalprojectcs50.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.amitshekhar.DebugDB;
 import com.cs50.finalprojectcs50.R;
 import com.cs50.finalprojectcs50.fragment.HomeFragment;
 import com.cs50.finalprojectcs50.fragment.StatisticFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.transition.MaterialContainerTransform;
 
 
 public class MainActivity extends AppCompatActivity {
