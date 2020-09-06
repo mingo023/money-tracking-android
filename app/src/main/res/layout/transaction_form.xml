@@ -2,11 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    tools:context=".activity.ActivityCreateTransaction"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/amount_input_layout"
@@ -94,14 +93,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/submit_transaction_btn"
         android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:textAlignment="center"
         android:layout_marginTop="12dp"
         android:paddingHorizontal="50dp"
         android:text="ADD"
-        android:onClick="addTransaction"
         android:gravity="center_vertical"
         tools:ignore="RtlCompat" />
-
 </LinearLayout>

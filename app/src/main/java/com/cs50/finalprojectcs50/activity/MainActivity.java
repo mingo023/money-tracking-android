@@ -6,12 +6,10 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.amitshekhar.DebugDB;
 import com.cs50.finalprojectcs50.R;
 import com.cs50.finalprojectcs50.adapter.PagerAdapter;
-import com.cs50.finalprojectcs50.fragment.PagerFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.transition.MaterialContainerTransform;
@@ -46,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void handleBtnClick(View v) {
         MaterialContainerTransform materialContainerTransform = new MaterialContainerTransform();
-        Intent intent = new Intent(this, ActivityCreateTransaction.class);
+        Intent intent = new Intent(this, CreateTransactionActivity.class);
         startActivity(intent);
     }
 }

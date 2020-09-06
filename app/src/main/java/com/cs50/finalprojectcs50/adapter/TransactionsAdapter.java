@@ -1,6 +1,7 @@
 package com.cs50.finalprojectcs50.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.cs50.finalprojectcs50.R;
-import com.cs50.finalprojectcs50.activity.MainActivity;
+import com.cs50.finalprojectcs50.activity.UpdateTransactionActivity;
 import com.cs50.finalprojectcs50.database.AppDatabase;
 import com.cs50.finalprojectcs50.model.Category;
 import com.cs50.finalprojectcs50.model.Transaction;
@@ -49,10 +48,6 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         }
     }
 
-    public static TransactionsAdapter getInstance() {
-        return INSTANCE;
-    }
-
     public static class TransactionViewHolder extends RecyclerView.ViewHolder {
         public MaterialCardView cardView;
         public TextView amountText;
@@ -73,7 +68,6 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         }
     }
 
-
     @NonNull
     @Override
     public TransactionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -91,14 +85,26 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         holder.categoryText.setText(category.name);
         holder.dateText.setText(DateConverters.formatDate(transaction.date, "dd/MM/yyyy"));
 
-        deleteButton.setOnClickListener(v -> {
-            AppDatabase.getInstance(context).transactionDao().delete(transaction.id);
-            loadData();
-            bottomSheetDialog.dismiss();
-            PagerAdapter.getInstance().notifyDataSetChanged();
+        holder.cardView.setOnClickListener(v -> {
+            Context context = v.getContext();
+
+            Intent intent = new Intent(context, UpdateTransactionActivity.class);
+            intent.putExtra("id", transaction.id);
+            intent.putExtra("amount", transaction.amount);
+            intent.putExtra("note", transaction.note);
+            intent.putExtra("category", category.name);
+            intent.putExtra("date", DateConverters.formatDate(transaction.date, "dd/MM/yyyy"));
+
+            context.startActivity(intent);
         });
         holder.cardView.setOnLongClickListener(v -> {
             bottomSheetDialog.show();
+            deleteButton.setOnClickListener(view -> {
+                AppDatabase.getInstance(context).transactionDao().delete(transaction.id);
+                loadData();
+                bottomSheetDialog.dismiss();
+                PagerAdapter.getInstance().notifyDataSetChanged();
+            });
             return true;
         });
     }
