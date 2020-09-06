@@ -1,50 +1,55 @@
 package com.cs50.finalprojectcs50.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.amitshekhar.DebugDB;
 import com.cs50.finalprojectcs50.R;
-import com.cs50.finalprojectcs50.adapter.PagerAdapter;
+import com.cs50.finalprojectcs50.fragment.HomeFragment;
+import com.cs50.finalprojectcs50.fragment.StatisticFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.transition.MaterialContainerTransform;
 
 
 public class MainActivity extends AppCompatActivity {
-    private PagerAdapter pagerAdapter;
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
-    private FloatingActionButton addNewTransactionBtn;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        pagerAdapter = new PagerAdapter(getSupportFragmentManager());
-        viewPager = findViewById(R.id.pager);
-        viewPager.setAdapter(pagerAdapter);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        tabLayout = findViewById(R.id.tab_layout);
-        tabLayout.setupWithViewPager(viewPager);
-
-        addNewTransactionBtn = findViewById(R.id.add_new_transaction_btn);
-
-        addNewTransactionBtn.setOnClickListener(v -> {
-            handleBtnClick(v);
-        });
+        // Default for fragment
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new HomeFragment()).commit();
+        }
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> onChangeItemBottomNav(item));
 
         DebugDB.getAddressLog();
     }
 
-    private void handleBtnClick(View v) {
-        MaterialContainerTransform materialContainerTransform = new MaterialContainerTransform();
-        Intent intent = new Intent(this, CreateTransactionActivity.class);
-        startActivity(intent);
+    private boolean onChangeItemBottomNav(MenuItem item) {
+        Fragment selectedFragment = new HomeFragment();
+        switch (item.getItemId()) {
+            case R.id.page_1:
+                selectedFragment = new HomeFragment();
+                break;
+            case R.id.page_2:
+                selectedFragment = new StatisticFragment();
+        }
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+        return true;
+
     }
+
 }
