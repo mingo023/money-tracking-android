@@ -112,7 +112,6 @@ public class TransactionForm extends AppCompatActivity {
     }
 
     protected Transaction submitForm() {
-        long amount = Integer.parseInt(amountInput.getText().toString());
         String note = noteInput.getText().toString();
         String category = categoryInput.getText().toString();
         String date = datePickerInput.getText().toString();
@@ -120,6 +119,8 @@ public class TransactionForm extends AppCompatActivity {
         if (!isValidForm(amountInput.getText().toString(), note, category, date)) {
             return null;
         }
+
+        long amount = Integer.parseInt(amountInput.getText().toString());
 
         String categoryId = AppDatabase.getInstance(this).categoryDao().findCategoryByName(category).id;
 

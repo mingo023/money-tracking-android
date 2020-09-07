@@ -59,9 +59,6 @@ public class StatisticFragment extends Fragment {
         startPickedDate = startOfMonth;
         endPickedDate = endOfMonth;
 
-        System.out.println(startOfMonth.getTime());
-        System.out.println(endOfMonth.getTime());
-
         startDatePicker.setText(DateConverters.formatDate(startOfMonth, "dd/MM/yyyy"));
         endDatePicker.setText(DateConverters.formatDate(endOfMonth, "dd/MM/yyyy"));
 
