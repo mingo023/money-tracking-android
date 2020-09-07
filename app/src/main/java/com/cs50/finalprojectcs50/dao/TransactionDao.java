@@ -16,11 +16,14 @@ public interface TransactionDao {
     @Insert
     void insert(Transaction transaction);
 
-    @Query("SELECT date, SUM(amount) as amount FROM transactions GROUP BY date")
-    List<SumAmountTransaction> getTransactions();
+    @Query("SELECT date, SUM(amount) as amount FROM transactions WHERE date >=:start AND date <=:end GROUP BY date")
+    List<SumAmountTransaction> getGroupedTransactions(long start, long end);
 
-    @Query("SELECT SUM(amount) as amount, categories.name as categoryName FROM transactions INNER JOIN categories ON transactions.category_id=categories.id GROUP BY categories.id")
-    List<SumTransactionWithCategory> getSumAmountWithCategory();
+    @Query("SELECT SUM(amount) as amount, categories.name as categoryName " +
+            "FROM transactions INNER JOIN categories ON transactions.category_id=categories.id " +
+            "WHERE date >=:start AND date <=:end " +
+            "GROUP BY categories.id")
+    List<SumTransactionWithCategory> getSumAmountWithCategory(long start, long end);
 
     @androidx.room.Transaction
     @Query("SELECT * FROM transactions")

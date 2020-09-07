@@ -37,19 +37,17 @@ public class DateConverters {
     }
 
     public static Date startOfWeek() {
-        LocalDate today = LocalDate.now();
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DATE, calendar.get(Calendar.DATE) - today.getDayOfWeek().getValue() + 1);
+        DateTime dateTime = new DateTime();
+        dateTime = dateTime.withDayOfWeek(Calendar.SUNDAY).withTime(0, 0, 0, 0);
 
-        return calendar.getTime();
+        return dateTime.toDate();
     }
 
     public static Date endOfWeek() {
-        LocalDate today = LocalDate.now();
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DATE, calendar.get(Calendar.DATE) + (7 - today.getDayOfWeek().getValue()));
+        DateTime dateTime = new DateTime();
+        dateTime = dateTime.withDayOfWeek(Calendar.SATURDAY).withTime(0, 0, 0, 0 );
 
-        return calendar.getTime();
+        return dateTime.toDate();
     }
 
     public static Date startOfMonth() {
