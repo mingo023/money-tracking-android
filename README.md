@@ -1,6 +1,6 @@
 # money-tracking-android
 ## Motivation
-I usually have a lot of transactions every single day so that I can not remember them. So, I developed this app that help me keep track my money effectively.
+I usually have a lot of transactions every single day so I can not remember them. That is a reason I developed this app that help me keep track my money effectively.
 
 ## Features
 - Create transaction
